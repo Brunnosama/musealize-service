@@ -6,12 +6,14 @@
 
 
 
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/Brunnosama/musealize-service">
-    <img src="front-end/assets/images/logo-musealize-branco.svg" alt="Logo Musealize">
+    <img src="front-end/src/assets/images/logo-musealize-branco.svg" alt="Logo Musealize">
   </a>
+
 
 <h3 align="center">Musealize</h3>
 
@@ -26,9 +28,12 @@
     <a href="https://github.com/Brunnosama/musealize-service/issues">Reporte um Bug</a>
   </p>
 
+
 <h4 align='center'>🛠️ Projeto em Desenvolvimento 🛠️</h4>
 
+
 </div>
+
 
 
 <!-- TABLE OF CONTENTS -->
@@ -51,9 +56,10 @@
 <!-- ABOUT THE PROJECT -->
 ## Sobre o Projeto
 
-Este projeto tem um objetivo educacional, como parte do curso Bootcamp em Desenvolvimento Front-end com React do [Instituto Infnet](https://curso.infnet.edu.br/bootcamp/desenvolvedor-front-end-react/). O projeto consiste num Web Service de criação de roteiros de visita para Instituições Culturais, e um Aplicativo Mobile para agendamento e compra dessas visitas pelos usuários do serviço. Através da plataforma, será possível criar, gerenciar e agendar roteiros de visitas, bem como pagar por estas visitas utilizando o [Paypal](https://www.paypal.com/br/webapps/mpp/home) e verificar as visitas compradas/agendadas.
+<p align="justify">Este projeto tem um objetivo educacional, como parte do curso Bootcamp em Desenvolvimento Front-end com React do [Instituto Infnet](https://curso.infnet.edu.br/bootcamp/desenvolvedor-front-end-react/). O projeto consiste num Web Service de criação de roteiros de visita para Instituições Culturais, e um Aplicativo Mobile para agendamento e compra dessas visitas pelos usuários do serviço. Através da plataforma, será possível criar, gerenciar e agendar roteiros de visitas, bem como pagar por estas visitas utilizando o [Paypal](https://www.paypal.com/br/webapps/mpp/home) e verificar as visitas compradas/agendadas.</p>
 
 <p align="right">(<a href="#top">volte ao topo</a>)</p>
+
 
 
 
@@ -64,6 +70,7 @@ Este projeto tem um objetivo educacional, como parte do curso Bootcamp em Desenv
 * [Bootstrap](https://getbootstrap.com)
 
 <p align="right">(<a href="#top">volte ao topo</a>)</p>
+
 
 
 
@@ -87,6 +94,7 @@ Link do Projeto: [https://github.com/Brunnosama/musealize-service](https://githu
 
 
 
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
@@ -95,10 +103,10 @@ Link do Projeto: [https://github.com/Brunnosama/musealize-service](https://githu
 [forks-url]: https://github.com/github_username/repo_name/network/members
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
 [stars-url]: https://github.com/github_username/repo_name/stargazers
-[issues-shield]: https://img.shields.io/github/issues/github_username/repo_name.svg?style=for-the-badge
-[issues-url]: https://github.com/Brunnosama/musealize-service/issues
-[license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
-[license-url]: https://github.com/Brunnosama/musealize-service/blob/main/LICENSE
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/brunnosama/musealize-service/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/brunnosama/musealize-service/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/brunno-azevedo-pessoa/
 [product-screenshot]: images/screenshot.png
