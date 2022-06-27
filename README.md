@@ -8,11 +8,11 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<br />
 <div align="center">
   <a href="https://github.com/Brunnosama/musealize-service">
     <img src="front-end/src/assets/img/logo-musealize-branco.svg" alt="Logo Musealize">
   </a>
+  <br/>
 
 
 <h3 align="center">Musealize</h3>
@@ -76,7 +76,7 @@
 <!-- LICENSE -->
 ## Licença
 
-Este projeto esta sob a Licença do MIT. Veja`LICENSE.txt` para mais informações.
+Este projeto esta sob a Licença do MIT. Veja `LICENSE.txt` para mais informações.
 
 
 
