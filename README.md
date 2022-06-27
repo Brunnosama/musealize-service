@@ -19,6 +19,7 @@
   <p align="center">
     Site de criação de roteiros e gestão de visitas para instituições culturais
     <br />
+    <br />
     <a href="https://github.com/Brunnosama/musealize-service"><strong>Explore a documentação »</strong></a>
     <br />
     <br />
@@ -55,7 +56,7 @@
 <!-- ABOUT THE PROJECT -->
 ## Sobre o Projeto
 
-<p align="justify">Este projeto tem um objetivo educacional, como parte do curso Bootcamp em Desenvolvimento Front-end com React do [Instituto Infnet](https://curso.infnet.edu.br/bootcamp/desenvolvedor-front-end-react/). O projeto consiste num Web Service de criação de roteiros de visita para Instituições Culturais, e um Aplicativo Mobile para agendamento e compra dessas visitas pelos usuários do serviço. Através da plataforma, será possível criar, gerenciar e agendar roteiros de visitas, bem como pagar por estas visitas utilizando o [Paypal](https://www.paypal.com/br/webapps/mpp/home) e verificar as visitas compradas/agendadas.</p>
+<p align="justify">Este projeto tem um objetivo educacional, como parte do curso Bootcamp em Desenvolvimento Front-end com React do <a href="https://curso.infnet.edu.br/bootcamp/desenvolvedor-front-end-react/">Instituto Infnet</a>. O projeto consiste num Web Service de criação de roteiros de visita para Instituições Culturais, e um Aplicativo Mobile para agendamento e compra dessas visitas pelos usuários do serviço. Através da plataforma, será possível criar, gerenciar e agendar roteiros de visitas, bem como pagar por estas visitas utilizando o <a href="https://www.paypal.com/br/webapps/mpp/home">Paypal</a> e verificar as visitas compradas/agendadas.</p>
 
 <p align="right">(<a href="#top">volte ao topo</a>)</p>
 
