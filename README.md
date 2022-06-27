@@ -8,6 +8,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
+<br />
 <div align="center">
   <a href="https://github.com/Brunnosama/musealize-service">
     <img src="front-end/src/assets/img/logo-musealize-branco.svg" alt="Logo Musealize">
@@ -53,12 +54,12 @@
 
 
 
+
 <!-- ABOUT THE PROJECT -->
 ## Sobre o Projeto
 
 <p align="justify">Este projeto tem um objetivo educacional, como parte do curso Bootcamp em Desenvolvimento Front-end com React do <a href="https://curso.infnet.edu.br/bootcamp/desenvolvedor-front-end-react/">Instituto Infnet</a>. O projeto consiste num Web Service de criação de roteiros de visita para Instituições Culturais, e um Aplicativo Mobile para agendamento e compra dessas visitas pelos usuários do serviço. Através da plataforma, será possível criar, gerenciar e agendar roteiros de visitas, bem como pagar por estas visitas utilizando o <a href="https://www.paypal.com/br/webapps/mpp/home">Paypal</a> e verificar as visitas compradas/agendadas.</p>
 
-<p align="right">(<a href="#top">volte ao topo</a>)</p>
 
 
 
@@ -69,17 +70,14 @@
 * [React.js](https://reactjs.org/)
 * [Bootstrap](https://getbootstrap.com)
 
-<p align="right">(<a href="#top">volte ao topo</a>)</p>
-
 
 
 
 <!-- LICENSE -->
 ## Licença
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Este projeto esta sob a Licença do MIT. Veja`LICENSE.txt` para mais informações.
 
-<p align="right">(<a href="#top">volte ao topo</a>)</p>
 
 
 
