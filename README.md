@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Brunnosama/musealize-service">
-    <img src="front-end/src/assets/images/logo-musealize-branco.svg" alt="Logo Musealize">
+    <img src="front-end/src/assets/img/logo-musealize-branco.svg" alt="Logo Musealize">
   </a>
 
 
