@@ -1,6 +1,12 @@
+import { Button, Container } from "react-bootstrap"
+
 function App() {
   return (
-    <p>Musealize</p>
+    <Container>
+      <p>Musealize</p>
+      <Button>Teste</Button>
+    </Container>
+
   );
 }
 
