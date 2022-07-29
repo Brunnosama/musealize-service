@@ -1,11 +1,12 @@
 import { Button, Container } from "react-bootstrap"
+import { toast } from "react-toastify"
 import styled from "styled-components";
 
 export function HomeView() {
     return (
         <Container>
         <Title>Musealize</Title>
-        <Button>Teste</Button>
+        <Button onClick={() => toast.success('Oi') }>Teste</Button>
       </Container>
     );
 }
