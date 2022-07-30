@@ -28,7 +28,7 @@ export function Header() {
         <Navbar fixed='top' expand="lg" bg={isTransparent ? undefined : 'white'}>
             <Container>
                 <Navbar.Brand to='/' as={Link}>
-                    <img src={isTransparent ? LogoYDetail : Logo} alt="Musealize" width={159} height={52} />
+                    <ImageStyled src={isTransparent ? LogoYDetail : Logo} alt="Musealize" width={159} height={52} />
                 </Navbar.Brand>
                 <NavbarToggleStyled aria-controls="basic-navbar-nav" >
                     <FontAwesomeIcon icon={faBars} className={isTransparent ? 'text-white' : 'text-warning'} size='lg' />
@@ -44,6 +44,12 @@ export function Header() {
         </Navbar>
     );
 }
+const ImageStyled = styled.img`
+@media(min-width: 992px) {
+    width: 200px;
+    height: auto;
+}
+`
 
 const NavbarCollapsedStyled = styled(Navbar.Collapse)`
 @media (max-width: 991px) {
