@@ -14,7 +14,7 @@ export function Header() {
     const [isTransparent, setIsTransparent] = useState(true)
     useEffect(() => {
         const scrollChange = () => {
-            const isLowScroll = window.scrollY < 100
+            const isLowScroll = window.scrollY < 60
             if (isLowScroll !== isTransparent) {
                 setIsTransparent(isLowScroll)
             }
