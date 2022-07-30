@@ -1,19 +1,23 @@
-
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import bgMobile from "../../assets/img/bg-musealize-mobile.jpg"
 import bgDesktop from "../../assets/img/bg-musealize.jpg"
 import { CustomButton } from "../../components/CustomButton";
+import { Layout } from "../../components/Layout";
+
 
 export function HomeView() {
   return (
-    <Banner className="vh-100">
-      <Container className="h-100 d-flex flex-column justify-content-center align-items-center align-items-lg-start">
-        <Title className="text-white text-center text-lg-start mt-auto mt-lg-0">Seja uma instituição parceira, crie seus roteiros culturais e receba visitantes!</Title>
+    <Layout>
+      <Banner className="vh-100">
+        <Container className="h-100 d-flex flex-column justify-content-center align-items-center align-items-lg-start">
+          <Title className="text-white text-center text-lg-start mt-auto mt-lg-0">Seja uma instituição parceira, crie seus roteiros culturais e receba visitantes!</Title>
           <CustomButton /*loading*/ size='lg' variant="primary" className='mt-auto mt-lg-3 mb-3' to='/cadastro'>Criar conta</CustomButton>
           <CustomButton size='lg' variant="primary" className='mb-4' to='/login'>Fazer Login</CustomButton>
-      </Container>
-</Banner >
+        </Container>
+      </Banner >
+    </Layout>
+
   );
 }
 
@@ -31,7 +35,7 @@ background-size: cover;
 }
 `
 const Title = styled.h1`
-font-size: 2rem;
+font-size: 1.75rem;
 font-weight: 600;
 text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30);
 
