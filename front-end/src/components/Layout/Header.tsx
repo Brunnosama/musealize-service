@@ -25,7 +25,7 @@ export function Header() {
         }
     }, [isTransparent])
     return (
-        <Navbar fixed='top' expand="lg" bg={isTransparent ? undefined : 'white'}>
+        <NavbarStyled fixed='top' expand="lg" bg={isTransparent ? undefined : 'white'}>
             <Container>
                 <Navbar.Brand to='/' as={Link}>
                     <ImageStyled src={isTransparent ? LogoYDetail : Logo} alt="Musealize" width={159} height={52} />
@@ -41,9 +41,16 @@ export function Header() {
                     </Nav>
                 </NavbarCollapsedStyled>
             </Container>
-        </Navbar>
+        </NavbarStyled>
     );
 }
+const NavbarStyled = styled(Navbar)`
+    transition: all .3s linear;
+    ${props => props.bg === 'white' && `
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30);
+`};
+`
+
 const ImageStyled = styled.img`
 @media(min-width: 992px) {
     width: 200px;
