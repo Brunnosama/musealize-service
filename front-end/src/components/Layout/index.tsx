@@ -1,3 +1,4 @@
+import { Footer } from "./Footer"
 import { Header } from "./Header"
 
 type Props = {
@@ -9,43 +10,7 @@ export const Layout: React.FC<Props> = ({children}) => {
         <>
             <Header />
             {children}
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
-            <p>footer</p> 
+            <Footer />
         </> 
     )
 }
