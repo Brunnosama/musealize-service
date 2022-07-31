@@ -53,7 +53,7 @@ export function Header({ startTransparent = false }: Props) {
                         <NavLinkStyled forwardedAs={Link} to='/' className={isTransparent ? '' : 'text-purple'}>Início</NavLinkStyled>
                         {isUserLoggedIn ? (
                             <>
-                            <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/novo-roteiro'>Criar novo Roteiro</CustomButton>
+                            <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/novo-roteiro'>Novo Roteiro</CustomButton>
                             <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/novo-roteiro' onClick={handleLogout}>Sair</CustomButton>
                             </>
                         ) : (
