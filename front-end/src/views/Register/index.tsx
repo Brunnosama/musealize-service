@@ -6,7 +6,7 @@ import { FormField } from "../../components/FormField";
 import { Layout } from "../../components/Layout";
 import { PageTitle } from "../../components/PageTitle";
 import * as yup from 'yup';
-import { createCompany } from "../../services/createCompany";
+import { createUser } from "../../services/createUser";
 import { FirebaseError } from "firebase/app";
 import {AuthErrorCodes} from "firebase/auth";
 import { toast } from "react-toastify";
@@ -46,7 +46,7 @@ export function RegisterView() {
         }),
         onSubmit: async (values, { setFieldError }) => {
             try {
-                const user = await createCompany(values)
+                const user = await createUser(values)
                 console.log('user', user)
             } catch (error) {
                 if (error instanceof FirebaseError && error.code === AuthErrorCodes.EMAIL_EXISTS) {
