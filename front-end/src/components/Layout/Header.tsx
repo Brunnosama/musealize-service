@@ -35,13 +35,13 @@ export function Header({startTransparent = false}: Props) {
                     <ImageStyled src={isTransparent ? LogoYDetail : Logo} alt="Musealize" width={159} height={52} />
                 </Navbar.Brand>
                 <NavbarToggleStyled aria-controls="basic-navbar-nav" >
-                    <FontAwesomeIcon icon={faBars} className={isTransparent ? 'text-white' : 'text-warning'} size='lg' />
+                    <FontAwesomeIconStyled icon={faBars} className={isTransparent ? 'text-white' : 'text-purple'} size='lg' />
                 </NavbarToggleStyled>
                 <NavbarCollapsedStyled id="basic-navbar-nav" className='justify-content-center text-center'>
                     <Nav className="ms-auto">
-                        <NavLinkStyled forwardedAs={Link} to='/' className={isTransparent ? 'text-white' : 'text-purple'}>Início</NavLinkStyled>
-                        <CustomButton className='mt-2 mt-lg-0 ms-lg-4' to='/cadastro'>Criar conta</CustomButton>
-                        <CustomButton className='mt-2 mt-lg-0 ms-lg-4' to='/login'>Fazer Login</CustomButton>
+                        <NavLinkStyled forwardedAs={Link} to='/' className={isTransparent ? '' : 'text-purple'}>Início</NavLinkStyled>
+                        <CustomButton variant={isTransparent ? 'primary' : 'secondary'} className='mt-2 mt-lg-0 ms-lg-4' to='/cadastro'>Criar conta</CustomButton>
+                        <CustomButton variant={isTransparent ? 'primary' : 'secondary'} className='mt-2 mt-lg-0 ms-lg-4' to='/login'>Fazer Login</CustomButton>
                     </Nav>
                 </NavbarCollapsedStyled>
             </Container>
@@ -76,9 +76,17 @@ const NavLinkStyled = styled(Nav.Link)`
     color: #3D2283 ;
     font-weight: 600;
 @media(min-width: 992px) {
-    color: #fff !important;
+    color: #FFDC50 !important;
     ${props => props.className === 'text-purple' && `
     color: #3D2283 !important;
     `}
 }
 `
+const FontAwesomeIconStyled = styled(FontAwesomeIcon)<Pick<Props, 'startTransparent'>>`
+    ${props => !props.startTransparent && `
+    color: #FFDC50 !important;
+    `}
+    ${props => props.className === 'text-purple' && `
+    color: #3D2283 !important;
+    `}
+    `
