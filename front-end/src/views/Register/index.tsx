@@ -6,42 +6,55 @@ import { FormField } from "../../components/FormField";
 import { Layout } from "../../components/Layout";
 import { PageTitle } from "../../components/PageTitle";
 import * as yup from 'yup';
+import { createCompany } from "../../services/createCompany";
+import { FirebaseError } from "firebase/app";
+import {AuthErrorCodes} from "firebase/auth";
+import { toast } from "react-toastify";
 
 type FormValues = {
-    companyName: string
-    companyEmail: string
-    companyPhone: string
-    companyPassword: string
-    companyAgree: boolean
+    name: string
+    email: string
+    phone: string
+    password: string
+    agree: boolean
 }
 
 export function RegisterView() {
     const formik = useFormik<FormValues>({
         initialValues: {
-            companyName: '',
-            companyEmail: '',
-            companyPhone: '',
-            companyPassword: '',
-            companyAgree: false
+            name: '',
+            email: '',
+            phone: '',
+            password: '',
+            agree: false
         },
         validationSchema: yup.object().shape({
-            companyName: yup.string()
+            name: yup.string()
                 .required('Informe o nome da Instituição.'),
-            companyEmail: yup.string()
+            email: yup.string()
                 .required('Informe seu e-mail.')
                 .email('Informe um e-mail válido.'),
-            companyPhone: yup.string()
+            phone: yup.string()
                 .required('Informe seu telefone.')
                 .min(14, 'Registre um número válido.'),
-            companyPassword: yup.string()
+            password: yup.string()
                 .required('Digite uma senha')
                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, //eslint-disable-line
-                    'No mínimo 8 caractéres, com uma Maiúscula, uma minúscula, um número e um caractére especial.'),
-            companyAgree: yup.boolean()
+                    'A senha deve ter mínimo 8 caractéres, com uma letra maiúscula, uma minúscula, um número e um caractére especial.'),
+            agree: yup.boolean()
                 .equals([true], 'É preciso aceitar os Termos de Uso.')
         }),
-        onSubmit: (values) => {
-            console.log('oi!', values)
+        onSubmit: async (values, { setFieldError }) => {
+            try {
+                const user = await createCompany(values)
+                console.log('user', user)
+            } catch (error) {
+                if (error instanceof FirebaseError && error.code === AuthErrorCodes.EMAIL_EXISTS) {
+                    setFieldError('email', 'Este e-mail já está em uso.')
+                    return
+                }
+                toast.error('Não foi possível efetuar o cadastro. Tente novamente.')
+            }
         }
     })
     const getFieldProps = (fieldName: keyof FormValues) => {
@@ -67,13 +80,13 @@ export function RegisterView() {
                             <FormField
                                 label='Nome da Instituição'
                                 placeholder='Digite o nome da Instituição'
-                                {...getFieldProps('companyName')}
+                                {...getFieldProps('name')}
                             />
                             <FormField
                                 type='email'
                                 label='E-mail'
                                 placeholder='O e-mail será seu nome de usuário'
-                                {...getFieldProps('companyEmail')}
+                                {...getFieldProps('email')}
                             />
                             <FormField
                                 type='tel'
@@ -83,22 +96,22 @@ export function RegisterView() {
                                     { mask: '(00) 0000-0000' },
                                     { mask: '(00) 00000-0000' }
                                 ]}
-                                {...getFieldProps('companyPhone')}
-                                onAccept={value => formik.setFieldValue('companyPhone', value)}
+                                {...getFieldProps('phone')}
+                                onAccept={value => formik.setFieldValue('phone', value)}
                             />
                             <FormField
                                 type='password'
                                 label='Senha'
                                 placeholder='Informe sua senha de acesso'
-                                {...getFieldProps('companyPassword')}
+                                {...getFieldProps('password')}
                             />
-                            <Form.Group className='mb-3 mt-4' controlId='input-companyAgree'>
+                            <Form.Group className='mb-3 mt-4' controlId='input-agree'>
                                 <Form.Check
-                                    {...formik.getFieldProps('companyAgree')}
+                                    {...formik.getFieldProps('agree')}
                                     type='checkbox'
                                     label={<span>Eu li e aceito os <a href='/termos-de-uso.pdf' target='_blank'>Termos de Uso</a>.</span>} />
-                                <Form.Control.Feedback type='invalid' className={formik.touched.companyAgree && formik.errors.companyAgree ? 'd-block' : undefined}>
-                                    {formik.errors.companyAgree}
+                                <Form.Control.Feedback type='invalid' className={formik.touched.agree && formik.errors.agree ? 'd-block' : undefined}>
+                                    {formik.errors.agree}
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <div className='d-grid mb-4 mt-4'>
