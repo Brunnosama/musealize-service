@@ -17,4 +17,8 @@ html, body, #root {
 #root > main {
     flex: 1;
 }
+a{
+    color: #3D2283;
+    text-decoration: none;
+}
 `

@@ -38,22 +38,21 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.30);
 ${props => props.size === 'lg' && `
     font-size: 1.125rem
 `};
-
 ${props => (props.variant === 'primary' || !props.variant) && `
-background-color: #FFDC50;
-color: #3D2283;
-&:hover{
-        background-color: #3D2283;
-        color: #FFDC50;}
-`};
-${props => props.variant === 'secondary' && `
 background-color:  #3D2283;
 color: #FFDC50;
 &:hover{
     background-color: #FFDC50;
     color: #3D2283;}
 `};
-${props => props.variant === 'outline-primary' && `
+${props => props.variant === 'secondary' && `
+background-color: #FFDC50;
+color: #3D2283;
+&:hover{
+        background-color: #3D2283;
+        color: #FFDC50;}
+`};
+${props => props.variant === 'outline-secondary' && `
 border: 2px solid #FFDC50 !important;
 color: #FFDC50;
 font-weight: 700;

@@ -40,8 +40,8 @@ export function Header({startTransparent = false}: Props) {
                 <NavbarCollapsedStyled id="basic-navbar-nav" className='justify-content-center text-center'>
                     <Nav className="ms-auto">
                         <NavLinkStyled forwardedAs={Link} to='/' className={isTransparent ? '' : 'text-purple'}>Início</NavLinkStyled>
-                        <CustomButton variant={isTransparent ? 'primary' : 'secondary'} className='mt-2 mt-lg-0 ms-lg-4' to='/cadastro'>Criar conta</CustomButton>
-                        <CustomButton variant={isTransparent ? 'primary' : 'secondary'} className='mt-2 mt-lg-0 ms-lg-4' to='/login'>Fazer Login</CustomButton>
+                        <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/cadastro'>Criar conta</CustomButton>
+                        <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/login'>Fazer Login</CustomButton>
                     </Nav>
                 </NavbarCollapsedStyled>
             </Container>
