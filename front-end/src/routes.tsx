@@ -1,4 +1,5 @@
 import { Route, Routes as RDRoutes } from 'react-router-dom';
+import { PrivateRoute } from './components/PrivateRoute';
 import { PublicOnlyRoute } from './components/PublicOnlyRoute';
 import { HomeView } from './views/Home';
 import { LoginView } from './views/Login';
@@ -29,7 +30,14 @@ export function Routes() {
                 }
             />
 
-            <Route path='/novo-roteiro' element={<NewTourView />} />
+            <Route
+                path='/novo-roteiro'
+                element={
+                    <PrivateRoute>
+                        <NewTourView />
+                    </PrivateRoute>
+
+                } />
         </RDRoutes>
     );
 }
