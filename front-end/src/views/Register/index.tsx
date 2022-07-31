@@ -43,7 +43,7 @@ export function RegisterView() {
             password: yup.string()
                 .required('Digite uma senha')
                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, //eslint-disable-line
-                    'A senha deve ter mínimo 8 caractéres, com uma letra maiúscula, uma minúscula, um número e um caractére especial.'),
+                    'A senha deve ter no mínimo 8 caractéres, com uma letra maiúscula, uma minúscula, um número e um caractére especial.'),
             agree: yup.boolean()
                 .equals([true], 'É preciso aceitar os Termos de Uso.')
         }),
@@ -119,7 +119,11 @@ export function RegisterView() {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <div className='d-grid mb-4 mt-4'>
-                                <CustomButton type='submit'>
+                                <CustomButton 
+                                    type='submit'
+                                    loading = {formik.isValidating || formik.isSubmitting}
+                                    disabled = {formik.isValidating || formik.isSubmitting}
+                                >
                                     Criar conta
                                 </CustomButton>
                             </div>
