@@ -1,5 +1,6 @@
 import { useFormik } from "formik"
 import { Form } from "react-bootstrap"
+import { AutocompleteField } from "../../components/AutocompleteField"
 import { CustomButton } from "../../components/CustomButton"
 import { FormField } from "../../components/FormField"
 
@@ -36,12 +37,12 @@ export function TourForm() {
     }
     return (
         <Form onSubmit={formik.handleSubmit}>
-            <FormField
+            <AutocompleteField
                 {...getFieldProps('startAddress')}
                 label="Ponto de partida (A)"
                 placeholder='Infome o endereço completo'
             />
-            <FormField
+            <AutocompleteField
                 {...getFieldProps('endAddress')}
                 label="Ponto de encerramento (B)"
                 placeholder='Infome o endereço completo'
