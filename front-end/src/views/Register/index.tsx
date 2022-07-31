@@ -5,6 +5,7 @@ import { CustomButton } from "../../components/CustomButton";
 import { FormField } from "../../components/FormField";
 import { Layout } from "../../components/Layout";
 import { PageTitle } from "../../components/PageTitle";
+import * as yup from 'yup';
 
 type FormValues = {
     companyName: string
@@ -19,10 +20,30 @@ export function RegisterView() {
         initialValues: {
             companyName: '',
             companyEmail: '',
-            companyPhone: '', 
+            companyPhone: '',
             companyPassword: '',
             companyAgree: false
         },
+        validationSchema: yup.object().shape({
+            companyName: yup.string()
+                .required('Informe o nome da Instituição.'),
+            companyEmail: yup.string()
+                .required('Informe seu e-mail.')
+                .email('Informe um e-mail válido.'),
+            companyPhone: yup.string()
+                .required('Informe seu telefone.')
+                .min(14, 'Registre um número válido.'),
+            companyPassword: yup.string()
+                .required('Digite uma senha')
+                .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, //eslint-disable-line
+                'No mínimo 8 caractéres, com uma Maiúscula, uma minúscula, um número e um caractére especial.'),
+            // yup.string()
+            //     .required('Digite sua senha.')
+            //     .min(8, 'A senha precisa ter ao menos 8 caractéres.')
+            //     .max(50, 'A senha não pode ter mais de 50 caractéres.'),
+            companyAgree: yup.boolean()
+                .equals([true], 'É preciso aceitar os Termos de Uso.')
+        }),
         onSubmit: (values) => {
             console.log('oi!', values)
         }
@@ -30,7 +51,10 @@ export function RegisterView() {
     const getFieldProps = (fieldName: keyof FormValues) => {
         return {
             ...formik.getFieldProps(fieldName),
-            controlId: `input-${fieldName}`
+            controlId: `input-${fieldName}`,
+            error: formik.errors[fieldName],
+            isInvalid: formik.touched[fieldName] && !!formik.errors[fieldName],
+            isValid: formik.touched[fieldName] && !formik.errors[fieldName]
         }
     }
     return (
@@ -47,7 +71,6 @@ export function RegisterView() {
                             <FormField
                                 label='Nome da Instituição'
                                 placeholder='Digite o nome da Instituição'
-                                error='Preencha seu nome.'
                                 {...getFieldProps('companyName')}
 
                             // isInvalid
@@ -59,7 +82,7 @@ export function RegisterView() {
                                 type='email'
                                 label='E-mail'
                                 placeholder='O e-mail será seu nome de usuário'
-                                error='Preencha um e-mail válido.'
+                                // error='Preencha um e-mail válido.'
                                 {...getFieldProps('companyEmail')}
                             // isInvalid
                             // mask={[
@@ -69,8 +92,8 @@ export function RegisterView() {
                             <FormField
                                 type='tel'
                                 label='Telefone'
-                                placeholder='(00) 0000-0000'
-                                error='Registre um número válido.'
+                                placeholder='(DD) 0000-0000'
+                                // error='Registre um número válido.'
                                 mask={[
                                     { mask: '(00) 0000-0000' },
                                     { mask: '(00) 00000-0000' }
@@ -83,7 +106,7 @@ export function RegisterView() {
                                 type='password'
                                 label='Senha'
                                 placeholder='Informe sua senha de acesso'
-                                error='Registre um número válido.'
+                                // error='Registre um número válido.'
                                 {...getFieldProps('companyPassword')}
                             // isInvalid
                             // mask={[
@@ -96,6 +119,11 @@ export function RegisterView() {
                                     type='checkbox'
                                     label={<>Eu li e aceito os <a href='/termos-de-uso.pdf' target='_blank'>Termos de Uso</a>.</>}
                                 />
+                                {formik.touched.companyAgree && formik.errors.companyAgree && (
+                                    <Form.Control.Feedback type='invalid' className='d-block'>
+                                        {formik.errors.companyAgree}
+                                    </Form.Control.Feedback>
+                                )}
                                 <div className='d-grid mb-4 mt-4'>
                                     <CustomButton type='submit'>
                                         Criar conta
