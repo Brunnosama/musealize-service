@@ -10,6 +10,8 @@ import { createUser } from "../../services/createUser";
 import { FirebaseError } from "firebase/app";
 import {AuthErrorCodes} from "firebase/auth";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import {updateUser} from '../../store/slices/userSlice';
 
 type FormValues = {
     name: string
@@ -20,6 +22,7 @@ type FormValues = {
 }
 
 export function RegisterView() {
+    const dispatch = useDispatch()
     const formik = useFormik<FormValues>({
         initialValues: {
             name: '',
@@ -47,7 +50,8 @@ export function RegisterView() {
         onSubmit: async (values, { setFieldError }) => {
             try {
                 const user = await createUser(values)
-                console.log('user', user)
+                const action = updateUser(user)
+                dispatch(action)
             } catch (error) {
                 if (error instanceof FirebaseError && error.code === AuthErrorCodes.EMAIL_EXISTS) {
                     setFieldError('email', 'Este e-mail já está em uso.')
