@@ -1,11 +1,17 @@
 import { useFormik } from "formik";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CustomButton } from "../../components/CustomButton";
 import { FormField } from "../../components/FormField";
 import { Layout } from "../../components/Layout";
 import { PageTitle } from "../../components/PageTitle";
 import * as yup from 'yup';
+import { loginUser } from "../../services/loginUser";
+import { AuthErrorCodes } from "firebase/auth";
+import { toast } from "react-toastify";
+import { FirebaseError } from "firebase/app";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../store/slices/userSlice";
 
 type FormValues = {
     email: string
@@ -14,6 +20,8 @@ type FormValues = {
 
 
 export function LoginView() {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const formik = useFormik<FormValues>({
         initialValues: {
             email: '',
@@ -25,12 +33,19 @@ export function LoginView() {
                 .email('Informe um e-mail válido.'),
             password: yup.string()
                 .required('Digite sua senha')
-                // .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, //eslint-disable-line
-                //     'A senha deve ter no mínimo 8 caractéres, com uma letra maiúscula, uma minúscula, um número e um caractére especial.')
         }),
 
         onSubmit: async (values) => {
-            console.log('values', values)
+            try {
+                const user = await loginUser(values)
+                dispatch(updateUser(user))
+                navigate('/novo-roteiro')
+            } catch (error) {
+                const errorMsg = error instanceof FirebaseError && (error.code === AuthErrorCodes.INVALID_PASSWORD || error.code === AuthErrorCodes.USER_DELETED) ?
+                'Login ou senha inválidos.':
+                'Não foi possível efetuar o Login. Tente novamente.'
+                toast.error(errorMsg)
+            }
         }
     })
     const getFieldProps = (fieldName: keyof FormValues) => {
