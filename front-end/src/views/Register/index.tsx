@@ -16,6 +16,9 @@ export function RegisterView() {
                     placeholder='Digite o nome da Instituição'
                     error='Preencha seu nome.'
                     isInvalid
+                    mask={[
+                        { mask: '000.000.000-00' }
+                    ]}
                 />
             </Container>
         </Layout>
