@@ -1,6 +1,7 @@
 import { Route, Routes as RDRoutes } from 'react-router-dom';
 import { PublicOnlyRoute } from './components/PublicOnlyRoute';
 import { HomeView } from './views/Home';
+import { LoginView } from './views/Login';
 import { NewTourView } from './views/NewTour';
 import { NotFoundView } from './views/NotFound'
 import { RegisterView } from './views/Register';
@@ -16,6 +17,14 @@ export function Routes() {
                 element={
                     <PublicOnlyRoute>
                         <RegisterView />
+                    </PublicOnlyRoute>
+                }
+            />
+            <Route
+                path='/login'
+                element={
+                    <PublicOnlyRoute>
+                        <LoginView />
                     </PublicOnlyRoute>
                 }
             />
