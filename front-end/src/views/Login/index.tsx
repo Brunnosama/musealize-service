@@ -5,6 +5,7 @@ import { CustomButton } from "../../components/CustomButton";
 import { FormField } from "../../components/FormField";
 import { Layout } from "../../components/Layout";
 import { PageTitle } from "../../components/PageTitle";
+import * as yup from 'yup';
 
 type FormValues = {
     email: string
@@ -18,7 +19,17 @@ export function LoginView() {
             email: '',
             password: ''
         },
-        onSubmit: (values) => {
+        validationSchema: yup.object().shape({
+            email: yup.string()
+                .required('Informe seu e-mail.')
+                .email('Informe um e-mail válido.'),
+            password: yup.string()
+                .required('Digite sua senha')
+                // .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, //eslint-disable-line
+                //     'A senha deve ter no mínimo 8 caractéres, com uma letra maiúscula, uma minúscula, um número e um caractére especial.')
+        }),
+
+        onSubmit: async (values) => {
             console.log('values', values)
         }
     })
