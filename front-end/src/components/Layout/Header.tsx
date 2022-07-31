@@ -39,7 +39,7 @@ export function Header({startTransparent = false}: Props) {
                 </NavbarToggleStyled>
                 <NavbarCollapsedStyled id="basic-navbar-nav" className='justify-content-center text-center'>
                     <Nav className="ms-auto">
-                        <NavLinkStyled forwardedAs={Link} to='/'>Início</NavLinkStyled>
+                        <NavLinkStyled forwardedAs={Link} to='/' className={isTransparent ? 'text-white' : 'text-purple'}>Início</NavLinkStyled>
                         <CustomButton className='mt-2 mt-lg-0 ms-lg-4' to='/cadastro'>Criar conta</CustomButton>
                         <CustomButton className='mt-2 mt-lg-0 ms-lg-4' to='/login'>Fazer Login</CustomButton>
                     </Nav>
@@ -77,5 +77,8 @@ const NavLinkStyled = styled(Nav.Link)`
     font-weight: 600;
 @media(min-width: 992px) {
     color: #fff !important;
+    ${props => props.className === 'text-purple' && `
+    color: #3D2283 !important;
+    `}
 }
 `
