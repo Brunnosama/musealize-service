@@ -4,17 +4,20 @@ import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoYDetail from "../../assets/img/logo-musealize-yellow-detail.svg"
 import Logo from "../../assets/img/logo-musealize-purple.svg"
 import { CustomButton } from '../CustomButton';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteUser, selectIsUserLoggedIn } from '../../store/slices/userSlice';
+import { logoutUser } from '../../services/logoutUser';
 
 type Props = {
     startTransparent?: boolean
 }
 
-export function Header({startTransparent = false}: Props) {
+export function Header({ startTransparent = false }: Props) {
     const [isTransparent, setIsTransparent] = useState(startTransparent)
     useEffect(() => {
         const scrollChange = () => {
@@ -28,6 +31,14 @@ export function Header({startTransparent = false}: Props) {
             window.removeEventListener('scroll', scrollChange)
         }
     }, [isTransparent, startTransparent])
+    const isUserLoggedIn = useSelector(selectIsUserLoggedIn)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const handleLogout = async () => {
+        await logoutUser()
+        dispatch(deleteUser())
+        navigate('/login')
+    }
     return (
         <NavbarStyled fixed='top' expand="lg" bg={isTransparent ? undefined : 'white'}>
             <Container>
@@ -40,8 +51,17 @@ export function Header({startTransparent = false}: Props) {
                 <NavbarCollapsedStyled id="basic-navbar-nav" className='justify-content-center text-center'>
                     <Nav className="ms-auto">
                         <NavLinkStyled forwardedAs={Link} to='/' className={isTransparent ? '' : 'text-purple'}>Início</NavLinkStyled>
-                        <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/cadastro'>Criar conta</CustomButton>
-                        <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/login'>Fazer Login</CustomButton>
+                        {isUserLoggedIn ? (
+                            <>
+                            <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/novo-roteiro'>Criar novo Roteiro</CustomButton>
+                            <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/novo-roteiro' onClick={handleLogout}>Sair</CustomButton>
+                            </>
+                        ) : (
+                            <>
+                                <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/cadastro'>Criar conta</CustomButton>
+                                <CustomButton variant={isTransparent ? 'secondary' : 'primary'} className='mt-2 mt-lg-0 ms-lg-4' to='/login'>Fazer Login</CustomButton>
+                            </>
+                        )}
                     </Nav>
                 </NavbarCollapsedStyled>
             </Container>
@@ -82,7 +102,7 @@ const NavLinkStyled = styled(Nav.Link)`
     `}
 }
 `
-const FontAwesomeIconStyled = styled(FontAwesomeIcon)<Pick<Props, 'startTransparent'>>`
+const FontAwesomeIconStyled = styled(FontAwesomeIcon) <Pick<Props, 'startTransparent'>>`
     ${props => !props.startTransparent && `
     color: #FFDC50 !important;
     `}
