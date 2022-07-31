@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { Col, Container, Form, FormGroup, Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { CustomButton } from "../../components/CustomButton";
 import { FormField } from "../../components/FormField";
@@ -36,7 +36,7 @@ export function RegisterView() {
             companyPassword: yup.string()
                 .required('Digite uma senha')
                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, //eslint-disable-line
-                'No mínimo 8 caractéres, com uma Maiúscula, uma minúscula, um número e um caractére especial.'),
+                    'No mínimo 8 caractéres, com uma Maiúscula, uma minúscula, um número e um caractére especial.'),
             companyAgree: yup.boolean()
                 .equals([true], 'É preciso aceitar os Termos de Uso.')
         }),
@@ -68,67 +68,47 @@ export function RegisterView() {
                                 label='Nome da Instituição'
                                 placeholder='Digite o nome da Instituição'
                                 {...getFieldProps('companyName')}
-
-                            // isInvalid
-                            // mask={[
-                            //     { mask: '' }
-                            // ]}
                             />
                             <FormField
                                 type='email'
                                 label='E-mail'
                                 placeholder='O e-mail será seu nome de usuário'
-                                // error='Preencha um e-mail válido.'
                                 {...getFieldProps('companyEmail')}
-                            // isInvalid
-                            // mask={[
-                            //     { mask: '' }
-                            // ]}
                             />
                             <FormField
                                 type='tel'
                                 label='Telefone'
                                 placeholder='(DD) 0000-0000'
-                                // error='Registre um número válido.'
                                 mask={[
                                     { mask: '(00) 0000-0000' },
                                     { mask: '(00) 00000-0000' }
                                 ]}
                                 {...getFieldProps('companyPhone')}
                                 onAccept={value => formik.setFieldValue('companyPhone', value)}
-                            // isInvalid
                             />
                             <FormField
                                 type='password'
                                 label='Senha'
                                 placeholder='Informe sua senha de acesso'
-                                // error='Registre um número válido.'
                                 {...getFieldProps('companyPassword')}
-                            // isInvalid
-                            // mask={[
-                            //     { mask: '' }
-                            // ]}
                             />
-                            <FormGroup className='mb-3 mt-4' controlId='input-company-agree'>
+                            <Form.Group className='mb-3 mt-4' controlId='input-companyAgree'>
                                 <Form.Check
-                                    {...getFieldProps('companyAgree')}
+                                    {...formik.getFieldProps('companyAgree')}
                                     type='checkbox'
-                                    label={<>Eu li e aceito os <a href='/termos-de-uso.pdf' target='_blank'>Termos de Uso</a>.</>}
-                                />
-                                {formik.touched.companyAgree && formik.errors.companyAgree && (
-                                    <Form.Control.Feedback type='invalid' className='d-block'>
-                                        {formik.errors.companyAgree}
-                                    </Form.Control.Feedback>
-                                )}
-                                <div className='d-grid mb-4 mt-4'>
-                                    <CustomButton type='submit'>
-                                        Criar conta
-                                    </CustomButton>
-                                </div>
-                                <p className='text-center'>Já possui conta?<br />
-                                    <Link to='/login'> Faça Login</Link></p>
-                            </FormGroup>
+                                    label={<span>Eu li e aceito os <a href='/termos-de-uso.pdf' target='_blank'>Termos de Uso</a>.</span>} />
+                                <Form.Control.Feedback type='invalid' className={formik.touched.companyAgree && formik.errors.companyAgree ? 'd-block' : undefined}>
+                                    {formik.errors.companyAgree}
+                                </Form.Control.Feedback>
+                            </Form.Group>
+                            <div className='d-grid mb-4 mt-4'>
+                                <CustomButton type='submit'>
+                                    Criar conta
+                                </CustomButton>
+                            </div>
                         </Form>
+                        <p className='text-center'>Já possui conta?<br />
+                            <Link to='/login'> Faça Login</Link></p>
                     </Col>
                 </Row>
             </Container>

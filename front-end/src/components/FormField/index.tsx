@@ -3,7 +3,7 @@ import { Form, FormControlProps } from "react-bootstrap"
 import { IMaskInput } from "react-imask"
 
 type Props = {
-    controlId: string
+    controlId?: string
     label?: string
     error?: string
     mask?: { mask: string }[]
@@ -13,10 +13,7 @@ type Props = {
 export function FormField({ controlId, label, error, mask, onAccept, ...inputProps }: Props) {
     return (
         <Form.Group className="mb-3" controlId={controlId}>
-            {label &&
-                <Form.Label className='mb-1'>
-                    {label}
-                </Form.Label>}
+            {label && <Form.Label className='mb-1'>{label}</Form.Label>}
             {mask ? (
                 <Form.Control 
                 {...inputProps}
@@ -25,7 +22,6 @@ export function FormField({ controlId, label, error, mask, onAccept, ...inputPro
                 onChange={undefined}
                 onAccept={onAccept}
                 />
-
             ) : (
                  <Form.Control {...inputProps} />
             )}
