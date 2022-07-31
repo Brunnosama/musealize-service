@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { Col, Container, Form, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CustomButton } from "../../components/CustomButton";
 import { FormField } from "../../components/FormField";
 import { Layout } from "../../components/Layout";
@@ -8,10 +8,10 @@ import { PageTitle } from "../../components/PageTitle";
 import * as yup from 'yup';
 import { createUser } from "../../services/createUser";
 import { FirebaseError } from "firebase/app";
-import {AuthErrorCodes} from "firebase/auth";
+import { AuthErrorCodes } from "firebase/auth";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import {updateUser} from '../../store/slices/userSlice';
+import { updateUser } from '../../store/slices/userSlice';
 
 type FormValues = {
     name: string
@@ -23,6 +23,7 @@ type FormValues = {
 
 export function RegisterView() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const formik = useFormik<FormValues>({
         initialValues: {
             name: '',
@@ -52,6 +53,7 @@ export function RegisterView() {
                 const user = await createUser(values)
                 const action = updateUser(user)
                 dispatch(action)
+                navigate('/novo-roteiro')
             } catch (error) {
                 if (error instanceof FirebaseError && error.code === AuthErrorCodes.EMAIL_EXISTS) {
                     setFieldError('email', 'Este e-mail já está em uso.')
@@ -119,10 +121,10 @@ export function RegisterView() {
                                 </Form.Control.Feedback>
                             </Form.Group>
                             <div className='d-grid mb-4 mt-4'>
-                                <CustomButton 
+                                <CustomButton
                                     type='submit'
-                                    loading = {formik.isValidating || formik.isSubmitting}
-                                    disabled = {formik.isValidating || formik.isSubmitting}
+                                    loading={formik.isValidating || formik.isSubmitting}
+                                    disabled={formik.isValidating || formik.isSubmitting}
                                 >
                                     Criar conta
                                 </CustomButton>

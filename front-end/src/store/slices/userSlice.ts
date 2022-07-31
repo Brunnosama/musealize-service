@@ -15,9 +15,9 @@ const slice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        updateUser: (state: any, action: PayloadAction<User>) => {
-            console.log('O state é', state)
-            console.log('Ação q chegou', action)
+        updateUser: (state, action: PayloadAction<User>) => {
+            state.loadingUser = false
+            state.user = action.payload
         },
         deleteUser: () => {
 
