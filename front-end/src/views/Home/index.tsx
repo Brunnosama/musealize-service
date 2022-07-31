@@ -8,7 +8,7 @@ import { Layout } from "../../components/Layout";
 
 export function HomeView() {
   return (
-    <Layout>
+    <Layout startTransparent>
       <Banner className="vh-100">
         <Container className="h-100 d-flex flex-column justify-content-center align-items-center align-items-lg-start">
           <Title className="text-white text-center text-lg-start mt-auto pt-5 mt-lg-0">Seja uma instituição parceira, crie seus roteiros culturais e receba visitantes!</Title>

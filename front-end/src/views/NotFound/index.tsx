@@ -1,6 +1,6 @@
 import { Layout } from "../../components/Layout";
 
-export function NorFoundView() {
+export function NotFoundView() {
     return (
             <Layout>
                 <h1>Página não encontrada</h1>
