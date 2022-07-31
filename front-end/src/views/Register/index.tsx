@@ -37,10 +37,6 @@ export function RegisterView() {
                 .required('Digite uma senha')
                 .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, //eslint-disable-line
                 'No mínimo 8 caractéres, com uma Maiúscula, uma minúscula, um número e um caractére especial.'),
-            // yup.string()
-            //     .required('Digite sua senha.')
-            //     .min(8, 'A senha precisa ter ao menos 8 caractéres.')
-            //     .max(50, 'A senha não pode ter mais de 50 caractéres.'),
             companyAgree: yup.boolean()
                 .equals([true], 'É preciso aceitar os Termos de Uso.')
         }),
