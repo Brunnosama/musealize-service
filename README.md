@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Brunnosama/musealize-service">
-    <img src="front-end/src/assets/img/logo-musealize-branco.svg" alt="Logo Musealize">
+    <img src="front-end/src/assets/img/logo-musealize-white.svg" alt="Logo Musealize">
   </a>
   <br/>
 
@@ -33,6 +33,13 @@
 <h4 align='center'>🛠️ Projeto em Desenvolvimento 🛠️</h4>
 
 
+</div>
+<div align="center">
+<p float="left" align="middle">
+  <img align="top" src="front-end/public/images/musealize-home-desktop.JPG" width="100" />
+  <img align="top" src="front-end/public/images/musealize-home-mobile.JPG" width="100" /> 
+  <img align="top" src="front-end/public/images/musealize-tour-desktop.JPG" width="100" />
+</p>
 </div>
 
 
