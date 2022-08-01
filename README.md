@@ -36,9 +36,9 @@
 </div>
 <div align="center">
 <p float="left" align="middle">
-  <img align="top" src="front-end/public/images/musealize-home-desktop.JPG" width="100" />
-  <img align="top" src="front-end/public/images/musealize-home-mobile.JPG" width="100" /> 
-  <img align="top" src="front-end/public/images/musealize-tour-desktop.JPG" width="100" />
+  <img align="top" src="front-end/public/images/musealize-home-desktop.JPG" width="425" />
+  <img align="top" src="front-end/public/images/musealize-home-mobile.JPG" width="143" /> 
+  <img align="top" src="front-end/public/images/musealize-tour-desktop.JPG" width="425" />
 </p>
 </div>
 
