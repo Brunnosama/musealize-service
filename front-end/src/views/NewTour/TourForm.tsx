@@ -4,6 +4,7 @@ import { AutocompleteField } from "../../components/AutocompleteField"
 import { CustomButton } from "../../components/CustomButton"
 import { FormField } from "../../components/FormField"
 import { Address } from "../../entities/Address"
+import * as yup from 'yup';
 
 type FormValues = {
     startAddress: Address | null
@@ -22,6 +23,19 @@ export function TourForm() {
             duration: '',
             price: '',
         },
+        validationSchema: yup.object().shape({
+            startAddress: yup.object()
+                .typeError('Selecione um endereço na lista.'),
+            endAddress: yup.object()
+                .typeError('Selecione um endereço na lista.'),
+            description: yup.string()
+                .required('Descreva o seu roteiro.'),
+            duration: yup.string()
+            .required('Informe a duração do percurso.'),
+            price: yup.string()
+            .required('Infome o valor do ingresso para o evento.'),
+            }),
+
         onSubmit: async (values) => {
             console.log(values)
         }
