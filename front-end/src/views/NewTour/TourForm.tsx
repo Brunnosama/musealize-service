@@ -3,10 +3,11 @@ import { Form } from "react-bootstrap"
 import { AutocompleteField } from "../../components/AutocompleteField"
 import { CustomButton } from "../../components/CustomButton"
 import { FormField } from "../../components/FormField"
+import { Address } from "../../entities/Address"
 
 type FormValues = {
-    startAddress: string
-    endAddress: string
+    startAddress: Address | null
+    endAddress: Address | null
     description: string
     duration: string
     price: string
@@ -15,8 +16,8 @@ type FormValues = {
 export function TourForm() {
     const formik = useFormik<FormValues>({
         initialValues: {
-            startAddress: '',
-            endAddress: '',
+            startAddress: null,
+            endAddress: null,
             description: '',
             duration: '',
             price: '',
@@ -41,11 +42,13 @@ export function TourForm() {
                 {...getFieldProps('startAddress')}
                 label="Ponto de partida (A)"
                 placeholder='Infome o endereço completo'
+                onChange={(address) => formik.setFieldValue('startAddress', address)}
             />
             <AutocompleteField
                 {...getFieldProps('endAddress')}
                 label="Ponto de encerramento (B)"
                 placeholder='Infome o endereço completo'
+                onChange={(address) => formik.setFieldValue('endAddress', address)}
             />
             <FormField
                 {...getFieldProps('description')}
