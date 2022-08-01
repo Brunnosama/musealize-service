@@ -13,6 +13,10 @@ export function AutocompleteField ({value, onChange, ...fieldProps}: Autocomplet
     const autocompleteRef = useRef<null | google.maps.places.Autocomplete >(null)
     const handleLoad = (autocomplete: google.maps.places.Autocomplete) => {
         autocompleteRef.current = autocomplete
+        autocomplete.setBounds(new google.maps.LatLngBounds(
+            new google.maps.LatLng(-8.083952, -34.977703),
+            new google.maps.LatLng(-8.027608, -34.859853)
+        ))
     }
     const handleChange = () => {
         const place = autocompleteRef.current?.getPlace()
@@ -30,7 +34,14 @@ export function AutocompleteField ({value, onChange, ...fieldProps}: Autocomplet
         <LoadGoogleScript>
             <Autocomplete
             onLoad={handleLoad}
-            onPlaceChanged={handleChange}>
+            onPlaceChanged={handleChange}
+            restrictions={{
+                country:'br'
+            }}
+            options ={{
+                strictBounds: true
+            }}
+            >
                 <FormField
                 {...fieldProps}
                 onChange={() => onChange(null)} />
