@@ -5,6 +5,7 @@ import { CustomButton } from "../../components/CustomButton"
 import { FormField } from "../../components/FormField"
 import { Address } from "../../entities/Address"
 import * as yup from 'yup';
+import { createTour, NewTourInput } from "../../services/createTour"
 
 type FormValues = {
     startAddress: Address | null
@@ -37,7 +38,7 @@ export function TourForm() {
             }),
 
         onSubmit: async (values) => {
-            console.log(values)
+            await createTour(values as NewTourInput)
         }
 
     })
