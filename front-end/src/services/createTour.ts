@@ -1,5 +1,7 @@
+import { addDoc, collection } from "firebase/firestore"
 import { Address } from "../entities/Address"
 import { calculateDistance } from "./calculateDistance"
+import { db } from "./firebase"
 
 export type NewTourInput = {
     startAddress: Address
@@ -34,6 +36,7 @@ export const createTour = async ( {startAddress, endAddress, description, durati
         endAddress,
         description, 
     }
+    await addDoc(collection(db, 'tours'), tourData)
 }
 
 const getPrice = (minutes: number) => {
