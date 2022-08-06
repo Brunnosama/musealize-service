@@ -12,7 +12,6 @@ type FormValues = {
     endAddress: Address | null
     description: string
     duration: string
-    price: string
 }
 
 export function TourForm() {
@@ -22,7 +21,6 @@ export function TourForm() {
             endAddress: null,
             description: '',
             duration: '',
-            price: '',
         },
         validationSchema: yup.object().shape({
             startAddress: yup.object()
@@ -32,10 +30,11 @@ export function TourForm() {
             description: yup.string()
                 .required('Descreva o seu roteiro.'),
             duration: yup.string()
-            .required('Informe a duração do percurso.'),
-            price: yup.string()
-            .required('Infome o valor do ingresso para o evento.'),
-            }),
+                .required('Informe a duração do percurso.')
+                .min(1)
+                .max(3),
+
+        }),
 
         onSubmit: async (values) => {
             await createTour(values as NewTourInput)
@@ -72,14 +71,15 @@ export function TourForm() {
                 as='textarea'
             />
             <FormField
+                label='Duração do Percurso (em minutos)'
+                placeholder='Informe a duração do evento em minutos'
+                mask={[
+                    { mask: '0' },
+                    { mask: '00' },
+                    { mask: '000' }
+                ]}
                 {...getFieldProps('duration')}
-                label="Duração do Percurso"
-                placeholder='Informe a duração do evento'
-            />
-            <FormField
-                {...getFieldProps('price')}
-                label="Valor do Ingresso"
-                placeholder='Infome o preço cobrado pelo evento'
+                onAccept={value => formik.setFieldValue('duration', value)}
             />
             <div className='d-grid d-md-block'>
                 <CustomButton

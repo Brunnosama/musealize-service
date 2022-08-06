@@ -1,16 +1,21 @@
 import { Address } from "../entities/Address"
 
-type calculateDistanceInput = {
+type CalculateDistanceInput = {
     origin: Address
     destination: Address
 }
 
-export const calculateDistance = async ({origin, destination}: calculateDistanceInput) => {
+export const calculateDistance = async ({origin, destination}: CalculateDistanceInput) => {
 const directionsService = new google.maps.DirectionsService()
-const result = await directionsService.route({
+const {routes} = await directionsService.route({
     origin: new google.maps.LatLng(origin.lat, origin.lng),
     destination: new google.maps.LatLng(destination.lat, destination.lng),
-    travelMode: google.maps.TravelMode.DRIVING
+    travelMode: google.maps.TravelMode.WALKING
 })
-console.log('result', result)
+if(!routes[0]?.legs[0]?.duration) {
+    throw new Error("Falha ao estabelecer percurso. Tente novamente.");
+}
+return {
+    distanceDuration: routes[0].legs[0].duration.value
+}
 }
