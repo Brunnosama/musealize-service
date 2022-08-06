@@ -37,7 +37,8 @@ export function TourForm() {
         }),
 
         onSubmit: async (values) => {
-            await createTour(values as NewTourInput)
+           const tour =  await createTour(values as NewTourInput)
+           console.log(tour)
         }
 
     })
