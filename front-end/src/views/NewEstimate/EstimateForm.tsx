@@ -5,9 +5,9 @@ import { CustomButton } from "../../components/CustomButton"
 import { FormField } from "../../components/FormField"
 import { Address } from "../../entities/Address"
 import * as yup from 'yup';
-import { createTour, NewTourInput } from "../../services/createTour"
+import { createEstimate, NewEstimateInput } from "../../services/createEstimate"
 import { useDispatch } from "react-redux"
-import { setCurrentTour } from "../../store/slices/tourSlice"
+import { setCurrentEstimate } from "../../store/slices/estimateSlice"
 
 type FormValues = {
     startAddress: Address | null
@@ -16,7 +16,7 @@ type FormValues = {
     duration: string
 }
 
-export function TourForm() {
+export function EstimateForm() {
     const dispatch = useDispatch()
     const formik = useFormik<FormValues>({
         initialValues: {
@@ -40,8 +40,8 @@ export function TourForm() {
         }),
 
         onSubmit: async (values) => {
-           const tour =  await createTour(values as NewTourInput)
-           dispatch(setCurrentTour(tour))
+           const estimate =  await createEstimate(values as NewEstimateInput)
+           dispatch(setCurrentEstimate(estimate))
         }
 
     })

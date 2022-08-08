@@ -1,8 +1,8 @@
 import { Address } from "./Address"
 
-export type Tour = {
+export type Estimate = {
     id: string,
-    tourMinutes: number,
+    estimateMinutes: number,
     baseDuration: number,
     totalDuration: number,
     price: number,

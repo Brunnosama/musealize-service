@@ -3,7 +3,7 @@ import { PrivateRoute } from './components/PrivateRoute';
 import { PublicOnlyRoute } from './components/PublicOnlyRoute';
 import { HomeView } from './views/Home';
 import { LoginView } from './views/Login';
-import { NewTourView } from './views/NewTour';
+import { NewEstimateView } from './views/NewEstimate';
 import { NotFoundView } from './views/NotFound'
 import { RegisterView } from './views/Register';
 
@@ -34,7 +34,7 @@ export function Routes() {
                 path='/novo-roteiro'
                 element={
                     <PrivateRoute>
-                        <NewTourView />
+                        <NewEstimateView />
                     </PrivateRoute>
 
                 } />

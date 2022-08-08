@@ -1,10 +1,10 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { Layout } from "../../components/Layout";
 import { PageTitle } from "../../components/PageTitle";
-import { TourDetails } from "./TourDetails";
-import { TourForm } from "./TourForm";
+import { EstimateDetails } from "./EstimateDetails";
+import { EstimateForm } from "./EstimateForm";
 
-export function NewTourView() {
+export function NewEstimateView() {
     return (
         <Layout>
             <Container>
@@ -13,10 +13,10 @@ export function NewTourView() {
                 </PageTitle>
                 <Row>
                     <Col xs={12} md={6} lg={7}>
-                    <TourForm />
+                    <EstimateForm />
                     </Col>
                     <Col xs={12} md={6} lg={5}>
-                    <TourDetails />
+                    <EstimateDetails />
                     </Col>
                 </Row>
             </Container>
