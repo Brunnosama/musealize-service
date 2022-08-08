@@ -6,6 +6,8 @@ import { FormField } from "../../components/FormField"
 import { Address } from "../../entities/Address"
 import * as yup from 'yup';
 import { createTour, NewTourInput } from "../../services/createTour"
+import { useDispatch } from "react-redux"
+import { setCurrentTour } from "../../store/slices/tourSlice"
 
 type FormValues = {
     startAddress: Address | null
@@ -15,6 +17,7 @@ type FormValues = {
 }
 
 export function TourForm() {
+    const dispatch = useDispatch()
     const formik = useFormik<FormValues>({
         initialValues: {
             startAddress: null,
@@ -38,7 +41,7 @@ export function TourForm() {
 
         onSubmit: async (values) => {
            const tour =  await createTour(values as NewTourInput)
-           console.log(tour)
+           dispatch(setCurrentTour(tour))
         }
 
     })
