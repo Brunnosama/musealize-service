@@ -4,7 +4,7 @@ import { PageTitle } from "../../components/PageTitle";
 import { EstimateDetails } from "./EstimateDetails";
 import { EstimateForm } from "./EstimateForm";
 
-export function NewEstimateView() {
+export function NewTourView() {
     return (
         <Layout>
             <Container>
