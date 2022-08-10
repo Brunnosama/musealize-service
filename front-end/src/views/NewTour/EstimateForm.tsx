@@ -6,23 +6,26 @@ import { FormField } from "../../components/FormField"
 import { Address } from "../../entities/Address"
 import * as yup from 'yup';
 import { createEstimate, NewEstimateInput } from "../../services/createEstimate"
-import { useDispatch } from "react-redux"
-import { setCurrentEstimate } from "../../store/slices/estimateSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { selectCurrentEstimate, setCurrentEstimate } from "../../store/slices/estimateSlice"
 
 type FormValues = {
     startAddress: Address | null
     endAddress: Address | null
     description: string
+    value: string
     duration: string
 }
 
 export function EstimateForm() {
     const dispatch = useDispatch()
+    const currentState = useSelector(selectCurrentEstimate)
     const formik = useFormik<FormValues>({
         initialValues: {
             startAddress: null,
             endAddress: null,
             description: '',
+            value:'',
             duration: '',
         },
         validationSchema: yup.object().shape({
@@ -32,10 +35,12 @@ export function EstimateForm() {
                 .typeError('Selecione um endereço na lista.'),
             description: yup.string()
                 .required('Descreva o seu roteiro.'),
+            value: yup.string()
+                .required('Digite o valor base do ingresso'),
             duration: yup.string()
                 .required('Informe a duração do percurso.')
-                .min(1)
-                .max(3),
+                .min(2)
+                .max(6),
 
         }),
 
@@ -51,7 +56,8 @@ export function EstimateForm() {
             controlId: `input-${fieldName}`,
             error: formik.errors[fieldName],
             isInvalid: formik.touched[fieldName] && !!formik.errors[fieldName],
-            isValid: formik.touched[fieldName] && !formik.errors[fieldName]
+            isValid: formik.touched[fieldName] && !formik.errors[fieldName],
+            disabled: !!currentState
         }
     }
     return (
@@ -73,6 +79,17 @@ export function EstimateForm() {
                 label="Descrição do Roteiro"
                 placeholder='Descreva o passo a passo e as atividades do roteiro'
                 as='textarea'
+            />
+            <FormField
+                label='Valor do Ingresso (em reais)'
+                placeholder='Informe o valor cobrado pelo ingresso. Esse será o valor base'
+                mask={[
+                    { mask: 'R$ 0' },
+                    { mask: 'R$ 00' },
+                    { mask: 'R$ 000' }
+                ]}
+                {...getFieldProps('value')}
+                onAccept={value => formik.setFieldValue('value', value)}
             />
             <FormField
                 label='Duração do Percurso (em minutos)'
