@@ -7,7 +7,7 @@ import { Address } from "../../entities/Address"
 import * as yup from 'yup';
 import { createEstimate, NewEstimateInput } from "../../services/createEstimate"
 import { useDispatch, useSelector } from "react-redux"
-import { selectCurrentEstimate, setCurrentEstimate } from "../../store/slices/estimateSlice"
+import { clearCurrentEstimate, selectCurrentEstimate, setCurrentEstimate } from "../../store/slices/estimateSlice"
 
 type FormValues = {
     startAddress: Address | null
@@ -19,14 +19,14 @@ type FormValues = {
 
 export function EstimateForm() {
     const dispatch = useDispatch()
-    const currentState = useSelector(selectCurrentEstimate)
+    const currentEstimate = useSelector(selectCurrentEstimate)
     const formik = useFormik<FormValues>({
         initialValues: {
-            startAddress: null,
-            endAddress: null,
-            description: '',
-            value:'',
-            duration: '',
+            startAddress: currentEstimate?.startAddress || null,
+            endAddress: currentEstimate?.endAddress || null,
+            description: currentEstimate?.description || '',
+            value: String(currentEstimate?.price) || '',
+            duration: String(currentEstimate?.baseDuration) || '',
         },
         validationSchema: yup.object().shape({
             startAddress: yup.object()
@@ -45,8 +45,8 @@ export function EstimateForm() {
         }),
 
         onSubmit: async (values) => {
-           const estimate =  await createEstimate(values as NewEstimateInput)
-           dispatch(setCurrentEstimate(estimate))
+            const estimate = await createEstimate(values as NewEstimateInput)
+            dispatch(setCurrentEstimate(estimate))
         }
 
     })
@@ -57,60 +57,77 @@ export function EstimateForm() {
             error: formik.errors[fieldName],
             isInvalid: formik.touched[fieldName] && !!formik.errors[fieldName],
             isValid: formik.touched[fieldName] && !formik.errors[fieldName],
-            disabled: !!currentState
+            disabled: !!currentEstimate
         }
     }
-    return (
-        <Form onSubmit={formik.handleSubmit}>
-            <AutocompleteField
-                {...getFieldProps('startAddress')}
-                label="Ponto de partida (A)"
-                placeholder='Infome o endereço completo'
-                onChange={(address) => formik.setFieldValue('startAddress', address)}
-            />
-            <AutocompleteField
-                {...getFieldProps('endAddress')}
-                label="Ponto de encerramento (B)"
-                placeholder='Infome o endereço completo'
-                onChange={(address) => formik.setFieldValue('endAddress', address)}
-            />
-            <FormField
-                {...getFieldProps('description')}
-                label="Descrição do Roteiro"
-                placeholder='Descreva o passo a passo e as atividades do roteiro'
-                as='textarea'
-            />
-            <FormField
-                label='Valor do Ingresso (em reais)'
-                placeholder='Informe o valor cobrado pelo ingresso. Esse será o valor base'
-                mask={[
-                    { mask: 'R$ 0' },
-                    { mask: 'R$ 00' },
-                    { mask: 'R$ 000' }
-                ]}
-                {...getFieldProps('value')}
-                onAccept={value => formik.setFieldValue('value', value)}
-            />
-            <FormField
-                label='Duração do Percurso (em minutos)'
-                placeholder='Informe a duração do evento em minutos'
-                mask={[
-                    { mask: '0' },
-                    { mask: '00' },
-                    { mask: '000' }
-                ]}
-                {...getFieldProps('duration')}
-                onAccept={value => formik.setFieldValue('duration', value)}
-            />
-            <div className='d-grid d-md-block'>
-                <CustomButton
-                    type='submit'
-                    loading={formik.isValidating || formik.isSubmitting}
-                    disabled={formik.isValidating || formik.isSubmitting}
-                >Registrar roteiro
-                </CustomButton>
-            </div>
 
-        </Form>
+    const handleChangeTour = () => {
+        dispatch(clearCurrentEstimate())
+        
+    }
+
+    return (
+        <>
+            <Form onSubmit={formik.handleSubmit}>
+                <AutocompleteField
+                    {...getFieldProps('startAddress')}
+                    label="Ponto de partida (A)"
+                    placeholder='Infome o endereço completo'
+                    onChange={(address) => formik.setFieldValue('startAddress', address)}
+                />
+                <AutocompleteField
+                    {...getFieldProps('endAddress')}
+                    label="Ponto de encerramento (B)"
+                    placeholder='Infome o endereço completo'
+                    onChange={(address) => formik.setFieldValue('endAddress', address)}
+                />
+                <FormField
+                    {...getFieldProps('description')}
+                    label="Descrição do Roteiro"
+                    placeholder='Descreva o passo a passo e as atividades do roteiro'
+                    as='textarea'
+                />
+                <FormField
+                    label='Valor do Ingresso (em reais)'
+                    placeholder='Informe o valor cobrado pelo ingresso. Esse será o valor base'
+                    mask={[
+                        { mask: 'R$ 0' },
+                        { mask: 'R$ 00' },
+                        { mask: 'R$ 000' }
+                    ]}
+                    {...getFieldProps('value')}
+                    onAccept={value => formik.setFieldValue('value', value)}
+                />
+                <FormField
+                    label='Duração do Percurso (em minutos)'
+                    placeholder='Informe a duração do evento em minutos'
+                    mask={[
+                        { mask: '0' },
+                        { mask: '00' },
+                        { mask: '000' }
+                    ]}
+                    {...getFieldProps('duration')}
+                    onAccept={value => formik.setFieldValue('duration', value)}
+                />
+                {!currentEstimate && (
+                    <div className='d-grid d-md-block'>
+                        <CustomButton
+                            type='submit'
+                            loading={formik.isValidating || formik.isSubmitting}
+                            disabled={formik.isValidating || formik.isSubmitting}>
+                            Registrar roteiro
+                        </CustomButton>
+                    </div>
+                )}
+            </Form>
+            {currentEstimate && (
+                <CustomButton
+                    variant='outline-primary'
+                    type='button'
+                    onClick={handleChangeTour}>
+                    Alterar roteiro
+                </CustomButton>
+            )}
+        </>
     )
 }

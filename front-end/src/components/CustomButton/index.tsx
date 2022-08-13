@@ -52,6 +52,15 @@ color: #3D2283;
         background-color: #3D2283;
         color: #FFDC50;}
 `};
+${props => props.variant === 'outline-primary' && `
+border: 2px solid #3D2283 !important;
+color: #3D2283;
+font-weight: 700;
+box-shadow: none;
+&:hover{
+    background-color: #3D2283;
+    color: #FFDC50;
+`};
 ${props => props.variant === 'outline-secondary' && `
 border: 2px solid #FFDC50 !important;
 color: #FFDC50;
