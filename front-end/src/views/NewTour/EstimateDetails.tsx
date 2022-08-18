@@ -1,12 +1,28 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { selectHasCurrentEstimate } from "../../store/slices/estimateSlice";
+import { EstimateMap } from "./EstimateMap";
+import { EstimateNumbers } from "./EstimateNumbers";
 
 export function EstimateDetails() {
-    return (
-        <WithoutEstimateStyled className='d-none d-md-flex text-center'>
-            <p className='m-0'>Preencha os dados ao lado para <br/> visualizar o percurso</p>
-        </WithoutEstimateStyled>
+    const hasCurrentEstimate = useSelector(selectHasCurrentEstimate)
+    if (!hasCurrentEstimate) {
+        return (
+            <WithoutEstimateStyled className='d-none d-md-flex text-center'>
+                <p className='m-0'>Preencha os dados ao lado para <br /> visualizar o percurso</p>
+            </WithoutEstimateStyled>
 
-    );
+        )
+    } else {
+        return (
+            <WithEstimateSttyled>
+                <EstimateMap />
+                <EstimateNumbers />
+            </WithEstimateSttyled>
+        )
+
+    }
+
 }
 
 const WithoutEstimateStyled = styled.div`
@@ -15,5 +31,9 @@ border: 1px dashed #686963;
 height: 100%;
 align-items: center;
 justify-content: center;
-
+`
+const WithEstimateSttyled = styled.div`
+height: 100%;
+display: flex;
+flex-direction: column;
 `

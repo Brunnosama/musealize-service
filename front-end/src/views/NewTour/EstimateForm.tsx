@@ -36,11 +36,13 @@ export function EstimateForm() {
             description: yup.string()
                 .required('Descreva o seu roteiro.'),
             value: yup.string()
-                .required('Digite o valor base do ingresso'),
+                .required('Digite o valor base do ingresso')
+                .min(4)
+                .max(6),
             duration: yup.string()
                 .required('Informe a duração do percurso.')
-                .min(2)
-                .max(6),
+                .min(1)
+                .max(3),
 
         }),
 
@@ -63,7 +65,7 @@ export function EstimateForm() {
 
     const handleChangeTour = () => {
         dispatch(clearCurrentEstimate())
-        
+
     }
 
     return (
@@ -121,12 +123,15 @@ export function EstimateForm() {
                 )}
             </Form>
             {currentEstimate && (
-                <CustomButton
-                    variant='outline-primary'
-                    type='button'
-                    onClick={handleChangeTour}>
-                    Alterar roteiro
-                </CustomButton>
+                <div className='d-grid d-md-block mb-3 mb-md-0'>
+                    <CustomButton
+                        variant='outline-primary'
+                        type='button'
+                        onClick={handleChangeTour}>
+                        Alterar roteiro
+                    </CustomButton>
+                </div>
+
             )}
         </>
     )
