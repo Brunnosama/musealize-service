@@ -8,6 +8,12 @@ import { ToastContainer } from 'react-toastify';
 import { GlobalStyle } from './assets/css/global';
 import store from './store/store';
 import { Provider as ReduxProvider } from "react-redux"
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+
+const paypalOptions = {
+  'client-id': 'AUl2X8P_KDWcSSiBtelOH2c3V7iRDqD0aV13YbUWs8bNfDBoFTB88GGkjah31SfjJ2GVeJbbs1HNsIG3',
+  currency: 'BRL'
+}
 
 
 const root = ReactDOM.createRoot(
@@ -16,11 +22,13 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
-      <BrowserRouter>
-        <GlobalStyle />
-        <App />
-        <ToastContainer />
-      </BrowserRouter>
+      <PayPalScriptProvider options={paypalOptions}>
+        <BrowserRouter>
+          <GlobalStyle />
+          <App />
+          <ToastContainer />
+        </BrowserRouter>
+      </PayPalScriptProvider>
     </ReduxProvider>
-  </React.StrictMode>
+  </React.StrictMode >
 );
