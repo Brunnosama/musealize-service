@@ -9,7 +9,7 @@ type Props = {
 
 export function LoadGoogleScript ({children}: Props) {
     const {isLoaded, loadError} = useLoadScript({
-        googleMapsApiKey:'AIzaSyALlCd2X12quqEOjlH2Dqj98vIMvuWVxAQ',
+        googleMapsApiKey:'AIzaSyBOYC5Zd1FZMrOHIDjObVEZzfOa8kMuY5U',
         libraries
     })
     if(loadError) {
